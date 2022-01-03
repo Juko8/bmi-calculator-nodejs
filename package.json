@@ -18,6 +18,10 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "ejs": "^2.5.7",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "puppeteer": "^13.0.1"
+  },
+  "devDependencies": {
+    "jest": "^27.4.5"
   }
 }
