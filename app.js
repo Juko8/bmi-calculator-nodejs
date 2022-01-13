@@ -8,7 +8,7 @@ app.set("views", __dirname + "/views");
 
 app.use("/public", express.static("public"));
 
-app.get("/", (res) => {
+app.get("/", (req, res) => {
     res.render("pages/landing");
 });
 
