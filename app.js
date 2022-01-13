@@ -8,24 +8,22 @@ app.set("views", __dirname + "/views");
 
 app.use("/public", express.static("public"));
 
-app.get("/", (req, res) => {
+app.get("/", (res) => {
     res.render("pages/landing");
 });
 
 app.get("/result", (req, res) => {
-    var m = (parseInt(req.query.cm, 10) / 100);
+    var m = parseInt(req.query.cm, 10) / 100;
     var kg = req.query.kg;
 
     if(m == 0 || isNaN(m)){
         res.redirect("/");
     }else {
-        var bmi = (kg / (m * m));
+        var bmi = kg / (m * m);
         res.render("pages/result", {
-            bmi: bmi
+            bmi
         });
     }
-
-  
 });
 
 var port = 8080;
