@@ -13,15 +13,37 @@ app.get("/", (req, res) => {
 });
 
 app.get("/result", (req, res) => {
-    var m = parseInt(req.query.cm, 10) / 100;
-    var kg = req.query.kg;
+    const m = parseInt(req.query.cm, 10) / 100;
+    const kg = req.query.kg;
 
-    if(m == 0 || isNaN(m)){
+    if (m == 0 || isNaN(m)){
         res.redirect("/");
-    }else {
-        var bmi = kg / (m * m);
+    } else {
+        const bmi = kg / (m * m);
+        const bmiCategory = require('./bmiCategory');
+        const bmiCategoryResult = bmiCategory(bmi);
         res.render("pages/result", {
-            bmi
+            bmi,
+            bmiCategoryResult
+        });
+    }
+});
+
+app.get("/ratioresult", (req, res) => {
+    const waist = req.query.waist;
+    const hip = req.query.hip;
+    const gender = req.query.gender;
+    console.log(req.url);
+
+    if (hip == 0 || isNaN(hip)){
+        res.redirect("/");
+    } else {
+        const ratio = waist/hip;
+        const waistHipRatio = require('./waistHipRatio');
+        const categoryResult = waistHipRatio(ratio, gender);
+        res.render("pages/ratioresult", {
+            ratio,
+            categoryResult
         });
     }
 });

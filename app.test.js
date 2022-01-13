@@ -9,7 +9,8 @@ function delay(time) {
       setTimeout(resolve, time)
   });
 }
-
+// NOTE: use node app.js before running test script
+// TODO: should maybe do that here
 describe(
   '/ (Home Page)',
   () => {
@@ -56,3 +57,39 @@ describe(
   timeout
 )
 
+// ------------------ UNIT TESTS ------------------
+
+const bmiCategory = require('./bmiCategory')
+const waistHipRatio = require ('./waistHipRatio')
+
+test('18 is underweight', () => {
+  expect(bmiCategory(18)).toBe("underweight");
+});
+test('21 is healthy', () => {
+  expect(bmiCategory(21)).toBe("healthy");
+});
+test('28 is overweight', () => {
+  expect(bmiCategory(28)).toBe("overweight");
+});
+test('32 is obese', () => {
+  expect(bmiCategory(32)).toBe("obese");
+});
+
+test('0.85 and male is healthy', () => {
+  expect(waistHipRatio(0.85, "male")).toBe("healthy");
+});
+test('0.75 and female is healthy', () => {
+  expect(waistHipRatio(0.75, "female")).toBe("healthy");
+});
+test('0.90 and male is overweight', () => {
+  expect(waistHipRatio(0.90, "male")).toBe("overweight");
+});
+test('0.84 and female is overweight', () => {
+  expect(waistHipRatio(0.84, "female")).toBe("overweight");
+});
+test('1 and male is obese', () => {
+  expect(waistHipRatio(1, "male")).toBe("obese");
+});
+test('0.85 and female is obese', () => {
+  expect(waistHipRatio(0.85, "female")).toBe("obese");
+});
